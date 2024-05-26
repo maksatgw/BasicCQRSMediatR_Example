@@ -12,6 +12,7 @@ namespace MediatrExample.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        //MediatR kütüphanemizi DI ile kullanıyoruz.
         private readonly IMediator _mediator;
 
         public ProductController(IMediator mediator)
@@ -21,23 +22,25 @@ namespace MediatrExample.Controllers
         [HttpGet("id")]
         public async Task<IActionResult> Get(Guid id)
         {
+            //Yapmamız gereken mediator içine bir query göndermek.
             var query = new GetProductByIdQuery()
             {
                 ProductId = id  
             };
-
+            //MediatR içindeki send metodu, ilgili handler metodunu bulacak ve tetikleyecek.
+            //Bir viewModel dönecek.
             return Ok(await _mediator.Send(query));
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            
             var query = new GetAllProductQuery();
             return Ok(await _mediator.Send(query));
         }
         [HttpPost]
         public async Task<IActionResult> Insert(ProductAddCommand command)
         {
-           
             return Ok(await _mediator.Send(command));
         }
     }

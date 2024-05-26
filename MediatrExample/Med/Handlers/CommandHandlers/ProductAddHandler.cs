@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace MediatrExample.Med.Handlers.CommandHandlers
 {
+    //IRequestHandler Interface'inden türer. Bir tane request ve bir tane response handle eder. 
     public class ProductAddHandler : IRequestHandler<ProductAddCommand, ProductAddViewModel>
     {
         private readonly IProductService _service;
@@ -16,6 +17,8 @@ namespace MediatrExample.Med.Handlers.CommandHandlers
             _service = service;
         }
 
+        //Interface'den gelen implement edilmiş handle metodu.
+        //Bu metot tetiklendiğinde ilgili Query tetiklenmiş demektir.
         public Task<ProductAddViewModel> Handle(ProductAddCommand request, CancellationToken cancellationToken)
         {
             var data = new ProductEntity()

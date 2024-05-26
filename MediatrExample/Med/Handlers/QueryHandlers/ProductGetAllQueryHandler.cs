@@ -5,6 +5,7 @@ using MediatrExample.Service;
 
 namespace MediatrExample.Med.Handlers.QueryHandlers
 {
+    //IRequestHandler Interface'inden türer. Bir tane request ve bir tane response handle eder. 
     public class ProductGetAllQueryHandler : IRequestHandler<GetAllProductQuery, List<ProductGetAllViewModel>>
     {
         private readonly IProductService _service;
@@ -14,6 +15,8 @@ namespace MediatrExample.Med.Handlers.QueryHandlers
             _service = service;
         }
 
+        //Interface'den gelen implement edilmiş handle metodu.
+        //Bu metot tetiklendiğinde ilgili Query tetiklenmiş demektir.
         public Task<List<ProductGetAllViewModel>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
         {
             var product = _service.GetAll();
